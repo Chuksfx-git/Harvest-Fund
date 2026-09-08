@@ -1,0 +1,602 @@
+/* ============================================================
+   HarvestFund — Investor Dashboard
+   Place this file at: assets/css/investor.css
+   ============================================================ */
+
+/* ── TOKENS ── */
+:root {
+  --forest:       #1A3329;   /* deep green — header bg         */
+  --forest-mid:   #274D3A;   /* lighter green — card surfaces  */
+  --gold:         #C5861F;   /* harvest gold — primary accent  */
+  --gold-light:   #F5E5C0;   /* gold tint — pill/badge bg      */
+  --cream:        #F7F3EB;   /* page background                */
+  --paper:        #FFFFFF;   /* card background                */
+  --ink:          #1C1C1E;   /* primary text                   */
+  --muted:        #6B7A6E;   /* secondary text                 */
+  --line:         #E8E2D5;   /* dividers                       */
+  --growth:       #2E6B44;   /* on-track green                 */
+  --growth-bg:    #E2EFE7;
+  --amber:        #A0660A;   /* delayed amber                  */
+  --amber-bg:     #FDF0D5;
+  --rust:         #B5402A;   /* at-risk red                    */
+  --rust-bg:      #FAE5E0;
+}
+
+/* ── RESET ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+a { text-decoration: none; color: inherit; }
+button { cursor: pointer; font-family: inherit; }
+img { display: block; max-width: 100%; }
+
+/* ── BASE ── */
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100dvh;
+}
+
+.mono { font-family: 'IBM Plex Mono', monospace; }
+
+/* ── TOP HEADER ── */
+.top-header {
+  background: var(--forest);
+  color: #fff;
+  padding: 18px 20px 24px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.brand-mark {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), #3F8B5C);
+  background-image: url(../images/harfund.jpeg);
+  flex-shrink: 0;
+}
+
+.brand-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+  letter-spacing: 0.01em;
+  color: #fff;
+}
+
+.notif-btn {
+  position: relative;
+  color: rgba(255,255,255,0.75);
+  padding: 6px;
+  border-radius: 8px;
+  transition: color .15s;
+}
+
+.notif-btn:hover { color: #fff; }
+
+.notif-dot {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 1.5px solid var(--forest);
+}
+
+.welcome-text {
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 2px;
+}
+
+.welcome-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+/* Portfolio balance card — signature element */
+.balance-card {
+  background: var(--forest-mid);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 18px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle growth-line watermark behind balance */
+.balance-card::before {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  right: -10px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(197,134,31,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.balance-label {
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.55);
+  font-weight: 600;
+}
+
+.balance-amount {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 32px;
+  font-weight: 600;
+  color: #fff;
+  margin: 6px 0 10px;
+  letter-spacing: -0.02em;
+}
+
+.balance-sub {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.payout-badge {
+  font-size: 12px;
+  background: rgba(197,134,31,0.2);
+  color: var(--gold-light);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-weight: 500;
+}
+
+/* ── SCROLLABLE CONTENT ── */
+.content {
+  padding: 20px 16px;
+}
+
+/* ── SUMMARY CARDS ── */
+.summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+
+.stat-card {
+  padding: 14px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stat-icon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1.3;
+}
+
+.stat-value {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* ── QUICK ACTIONS ── */
+.quick-actions {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 13.5px;
+  font-weight: 600;
+  transition: opacity .15s, transform .1s;
+  border: none;
+  white-space: nowrap;
+}
+
+.action-btn:active { transform: scale(0.97); }
+
+.action-btn--primary {
+  background: var(--gold);
+  color: var(--forest);
+}
+
+.action-btn--primary:hover { opacity: 0.9; }
+
+.action-btn--outline {
+  background: var(--paper);
+  color: var(--ink);
+  border: 1.5px solid var(--line);
+}
+
+.action-btn--outline:hover { border-color: var(--ink); }
+
+/* ── SECTIONS ── */
+.section {
+  margin-bottom: 28px;
+}
+
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.section-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--growth);
+}
+
+/* ── EMPTY STATE ── */
+.empty-state {
+  background: var(--paper);
+  border: 1.5px dashed var(--line);
+  border-radius: 16px;
+  padding: 32px 20px;
+  text-align: center;
+}
+
+.empty-icon {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.empty-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.empty-sub {
+  font-size: 13.5px;
+  color: var(--muted);
+  max-width: 260px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+/* ── PROJECT CARDS ── */
+.project-card,
+.farm-preview-card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.project-photo,
+.farm-preview-photo {
+  height: 100px;
+  background: linear-gradient(120deg, #C8DFC0, #E5D9B0);
+  position: relative;
+}
+
+.farm-preview-photo {
+  background: linear-gradient(120deg, #DFC8C8, #E5D9B0);
+}
+
+.project-tag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: var(--forest);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.project-body {
+  padding: 14px 16px 16px;
+}
+
+.project-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 3px;
+}
+
+.project-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.project-roi {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  color: var(--growth);
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.project-meta {
+  font-size: 12.5px;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+/* ── STAGE TRACKER — signature element ── */
+.stage-tracker {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 14px;
+}
+
+.stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.stage-bar {
+  position: absolute;
+  top: 6px;
+  left: -50%;
+  width: 100%;
+  height: 2px;
+  background: var(--line);
+  z-index: 1;
+}
+
+.stage:first-child .stage-bar { display: none; }
+
+.stage-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--line);
+  border: 2px solid var(--cream);
+  z-index: 2;
+  position: relative;
+  transition: background .2s;
+}
+
+.stage-label {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  margin-top: 5px;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* done stages */
+.stage.done .stage-bar   { background: var(--growth); }
+.stage.done .stage-dot   { background: var(--growth); border-color: var(--paper); }
+.stage.done .stage-label { color: var(--growth); }
+
+/* current stage */
+.stage.current .stage-bar { background: var(--growth); }
+.stage.current .stage-dot {
+  background: var(--gold);
+  border-color: var(--paper);
+  box-shadow: 0 0 0 4px var(--gold-light);
+}
+.stage.current .stage-label { color: var(--ink); }
+
+/* ── PAYOUT LINE ── */
+.payout-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+  border-top: 1px dashed var(--line);
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.payout-date {
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.payout-date strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* ── STATUS PILLS ── */
+.status-pill {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.status-pill--ontrack {
+  background: var(--growth-bg);
+  color: var(--growth);
+}
+
+.status-pill--delayed {
+  background: var(--amber-bg);
+  color: var(--amber);
+}
+
+.status-pill--atrisk {
+  background: var(--rust-bg);
+  color: var(--rust);
+}
+
+/* ── FUNDING BAR ── */
+.fund-bar-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.fund-bar {
+  flex: 1;
+  height: 6px;
+  background: var(--line);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.fund-bar-fill {
+  height: 100%;
+  background: var(--growth);
+  border-radius: 999px;
+  transition: width .4s ease;
+}
+
+.fund-bar-pct {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--growth);
+}
+
+.insurance-note {
+  font-size: 11.5px;
+  color: var(--amber);
+  background: var(--amber-bg);
+  padding: 6px 10px;
+  border-radius: 8px;
+  margin-top: 6px;
+}
+
+/* ── DOCUMENT VAULT ── */
+.vault-list {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.vault-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--line);
+  transition: background .15s;
+}
+
+.vault-item:last-child { border-bottom: none; }
+
+.vault-item:hover { background: var(--cream); }
+
+.vault-icon { font-size: 20px; flex-shrink: 0; }
+
+.vault-label {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.vault-arrow {
+  font-size: 18px;
+  color: var(--muted);
+}
+
+/* ── BOTTOM NAV ── */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--paper);
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-around;
+  padding: 8px 0 max(8px, env(safe-area-inset-bottom));
+  z-index: 200;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 10px;
+  transition: color .15s;
+}
+
+.nav-item svg { transition: stroke .15s; }
+
+.nav-item.active,
+.nav-item:hover {
+  color: var(--forest);
+}
+
+/* ── RESPONSIVE — tablets ── */
+@media (min-width: 600px) {
+  .content { max-width: 540px; margin: 0 auto; }
+  .top-header { padding: 20px 28px 26px; }
+  .summary { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ── REDUCED MOTION ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
